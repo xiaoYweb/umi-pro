@@ -1,0 +1,89 @@
+@import "./assets/styles/normalize";
+@import "~antd/es/style/themes/default.less";
+@import "./assets/styles/mixins";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+@media (max-width: @screen-xs) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// 兼容IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+  body .ant-design-pro > .ant-layout {
+    min-height: 100vh;
+  }
+}
+
+.page-wrapper {
+  // margin: -14px -14px 0!important; // baseclayout 组件
+}
+
+.toast-load-modal {
+  .ant-modal-body {
+    padding: 0;
+    .ant-modal-confirm-content {
+      margin-top: 0;
+      .toast-loading {
+        padding: 16px 0;
+        text-align: center;
+      }
+    }
+  }
+  .ant-modal-confirm-btns {
+    display: none;
+  }
+}
+
+.ant-pro-sider-menu-logo h1 {
+  .textOverflow();
+  font-size: 18px!important;
+}
+
+.ant-pro-page-header-wrap-children-content {
+  margin: 14px 14px 0!important;
+}
+
+.ant-pro-global-footer {
+  margin: 20px 0!important;
+}

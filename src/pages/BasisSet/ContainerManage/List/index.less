@@ -1,0 +1,48 @@
+@import "~antd/es/style/themes/default";
+@import "~@/assets/styles/mixins";
+
+.wrapper {
+  .fj();
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.form {
+  flex: 1;
+  :global {
+    .ant-form-item {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.search {
+  width: 200px;
+  text-align: right;
+}
+
+.contact {
+  margin: 0;
+  line-height: 22px;
+}
+
+.caozuo a {
+  margin-right: 8px;
+}
+
+.etc {
+  overflow: hidden;    
+  text-overflow:ellipsis;    
+  white-space: nowrap;
+}
+.btn-area {
+  margin-left: 20px;
+  &>button:nth-of-type(1) {
+    margin-right: 10px;
+  }
+}
+.second-btn-area {
+  &>button {
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "message": "Network Error",
+  "name": "Error",
+  "stack": "Error: Network Error\n    at createError (http://localhost:8088/umi.js:67141:15)\n    at XMLHttpRequest.handleError (http://localhost:8088/umi.js:66632:14)",
+  "config": {
+    "url": "/investment-center/wms/supplierlist",
+    "method": "get",
+    "params": {
+      "pageNum": 1,
+      "pageSize": 10,
+      "warehouseId": "1262625961557987330",
+      "operator": "2088041000000000"
+    },
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "token": "21a39da1-fbc4-4f68-89d9-91c27c50cc69"
+    },
+    "baseURL": "https://daily-api.xinc818.com/",
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 60000,
+    "withCredentials": true,
+    "responseType": "json",
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "cancelToken": {
+      "promise": {}
+    }
+  }
+}
