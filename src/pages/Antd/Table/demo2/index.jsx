@@ -3,7 +3,7 @@ import { Table, Popconfirm, Form } from 'antd';
 import EditableCell, { EditableContext } from './EditableCell';
 
 const data = [];
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < 2; i++) {
   data.push({
     key: i.toString(),
     name: `Edrward ${i}`,
@@ -54,7 +54,7 @@ class EditableTable extends React.Component {
                   </a>
                 )}
               </EditableContext.Consumer>
-              <Popconfirm title="Sure to cancel?" onConfirm={() => this.cancel(record.key)}>
+              <Popconfirm title="Sure to cancel?" onConfirm={this.cancel}>
                 <a>Cancel</a>
               </Popconfirm>
             </span>

@@ -1,5 +1,9 @@
 import React from 'react';
-import { Form, Input } from 'antd';
+import { 
+  Form, 
+  // Input, 
+  InputNumber 
+} from 'antd';
 import { EditableContext } from './EditableRow';
 
 
@@ -28,24 +32,39 @@ class EditableCell extends React.Component {
     });
   };
 
+  validator = (rule, value, callback) => {
+    // console.log("validator -> rule, value", rule, `--${value}--`, typeof value)
+    if (value === 0) return callback('调整数必须为-9999 至 9999 的非 0 整数')
+    if (!value) return callback('必填项')
+    return callback()
+  }
+
   renderCell = form => {
     this.form = form;
-    const { children, dataIndex, record, title } = this.props;
+    const { children, dataIndex, record } = this.props;
     const { editing } = this.state;
     return editing ? (
       <Form.Item style={{ margin: 0 }}>
         {form.getFieldDecorator(dataIndex, {
           rules: [
-            {
-              required: true,
-              message: `${title} is required.`,
-            },
+            { validator: this.validator }
           ],
           initialValue: record[dataIndex],
-        })(<Input ref={node => {
-          this.input = node
-          return node
-        }} onPressEnter={this.save} onBlur={this.save} />)}
+        })(
+          // <Input ref={node => {
+          //   this.input = node
+          //   return node
+          // }} onPressEnter={this.save} onBlur={this.save} />
+          <InputNumber
+            ref={node => {
+              this.input = node
+              return node
+            }}
+
+            onPressEnter={this.save} onBlur={this.save}
+          />
+
+        )}
       </Form.Item>
     ) : (
         <div

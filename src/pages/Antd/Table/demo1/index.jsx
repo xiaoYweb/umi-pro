@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Button, Popconfirm } from 'antd';
 import EditableRow from './EditableRow';
 import EditableCell from './EditableCell';
-
+import styles from './index.less'
 
 class EditableTable extends React.Component {
   constructor(props) {
@@ -12,11 +12,11 @@ class EditableTable extends React.Component {
         title: 'name',
         dataIndex: 'name',
         width: '30%',
-        editable: true,
       },
       {
         title: 'age',
         dataIndex: 'age',
+        editable: true,
       },
       {
         title: 'address',
@@ -72,7 +72,7 @@ class EditableTable extends React.Component {
     });
   };
 
-  handleSave = row => {
+  handleSave = row => { // 保存数据
     const newData = [...this.state.dataSource];
     const index = newData.findIndex(item => row.key === item.key);
     const item = newData[index];
@@ -82,6 +82,10 @@ class EditableTable extends React.Component {
     });
     this.setState({ dataSource: newData });
   };
+
+  getValues = () => {
+    console.log(this.state.dataSource)
+  }
 
   render() {
     const { dataSource } = this.state;
@@ -107,10 +111,11 @@ class EditableTable extends React.Component {
       };
     });
     return (
-      <div>
+      <div className={styles['form-wrap']}>
         <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
           Add a row
         </Button>
+        <Button onClick={this.getValues}>getValues</Button>
         <Table
           components={components}
           

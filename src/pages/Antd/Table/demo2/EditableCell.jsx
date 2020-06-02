@@ -24,21 +24,21 @@ class EditableCell extends React.Component {
     } = this.props;
     return (
       <td {...restProps}>
-        {editing ? (
-          <Form.Item style={{ margin: 0 }}>
-            {getFieldDecorator(dataIndex, {
-              rules: [
-                {
-                  required: true,
-                  message: `Please Input ${title}!`,
-                },
-              ],
-              initialValue: record[dataIndex],
-            })(this.getInput())}
-          </Form.Item>
-        ) : (
-            children
-          )}
+        {
+          editing ? (
+            <Form.Item style={{ margin: 0 }}>
+              {getFieldDecorator(dataIndex, {
+                rules: [
+                  {
+                    required: true,
+                    message: `Please Input ${title}!`,
+                  },
+                ],
+                initialValue: record[dataIndex],
+              })(this.getInput())}
+            </Form.Item>
+          ) : children
+        }
       </td>
     );
   };
