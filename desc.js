@@ -2,7 +2,9 @@
  * form fns
  * getFieldDecorator(key, option)(<Comp />)
  * getFieldsValue() 获取 数据状态
+ * setFieldsValue() 设置 数据状态
  * resetFields()  重置状态
+ * validateFields(['keyname'], {force: true} / (err, values) => {} )
  */
 
 /**

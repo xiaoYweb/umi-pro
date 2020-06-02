@@ -15,7 +15,7 @@ function handleChange(valArr) {
   console.log(`selected ${valArr}`, valArr);
 }
 
-class Demo2 extends React.Component {
+class Demo extends React.Component {
   state = {}
 
   render() {
@@ -33,7 +33,7 @@ class Demo2 extends React.Component {
   }
 }
 
-export default Demo2;
+export default Demo;
 
 /**
  * 多选 

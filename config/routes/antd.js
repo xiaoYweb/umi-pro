@@ -17,6 +17,18 @@ const routes = [
         component: './Antd/Input',
       },
       {
+        exact: true,
+        path: '/antd/form',
+        name: 'Form',
+        component: './Antd/Form',
+      },
+      {
+        exact: true,
+        path: '/antd/table',
+        name: 'Table',
+        component: './Antd/Table',
+      },
+      {
         component: './404',
       }
     ]
