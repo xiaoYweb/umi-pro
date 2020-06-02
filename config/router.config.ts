@@ -1,4 +1,5 @@
 import { IRoute } from 'umi-types';
+import antdRoutes from './routes/antd';
 
 const routes: IRoute[] = [
   {
@@ -125,6 +126,7 @@ const routes: IRoute[] = [
               }
             ]
           },
+          ...antdRoutes,
           {
             component: './404',
           }
