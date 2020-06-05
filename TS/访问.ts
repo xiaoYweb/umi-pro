@@ -6,9 +6,11 @@
 
 class Demo {
   constructor(private name: string) { }
+
   get getName() {
     return `your name is ${this.name}`;
   }
+
   set setName(name: string) {
     this.name = name;
   }
@@ -22,10 +24,12 @@ console.log(demo.getName)
 
 class Single {
   private static instance: Single;
+  
   private constructor() { }
+
   static create() {
     if (!Single.instance) {
-      Single.instance = new Single;
+      Single.instance = new Single();
     }
     return Single.instance;
   }

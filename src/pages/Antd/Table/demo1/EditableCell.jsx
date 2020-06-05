@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  Form, 
+import {
+  Form,
   // Input, 
-  InputNumber 
+  InputNumber
 } from 'antd';
 import { EditableContext } from './EditableRow';
 
@@ -11,6 +11,7 @@ class EditableCell extends React.Component {
   state = {
     editing: false,
   };
+
 
   toggleEdit = () => {
     const editing = !this.state.editing;
@@ -24,6 +25,7 @@ class EditableCell extends React.Component {
   save = e => {
     const { record, handleSave } = this.props;
     this.form.validateFields((error, values) => {
+      console.log('values', values)
       if (error && error[e.currentTarget.id]) {
         return;
       }
@@ -32,12 +34,25 @@ class EditableCell extends React.Component {
     });
   };
 
+  updateState = values => {
+    const { record, handleSave } = this.props;
+    handleSave({ ...record, ...values });
+  }
+
   validator = (rule, value, callback) => {
+    try {
+      const { getFieldsValue } = this.form;
+      this.updateState(getFieldsValue())
+    } catch (err) {
+      console.log('err, -----', err)
+    }
     // console.log("validator -> rule, value", rule, `--${value}--`, typeof value)
     if (value === 0) return callback('调整数必须为-9999 至 9999 的非 0 整数')
     if (!value) return callback('必填项')
     return callback()
   }
+
+  static contextType = EditableContext
 
   renderCell = form => {
     this.form = form;
@@ -56,6 +71,8 @@ class EditableCell extends React.Component {
           //   return node
           // }} onPressEnter={this.save} onBlur={this.save} />
           <InputNumber
+            max={9999}
+            min={-9999}
             ref={node => {
               this.input = node
               return node

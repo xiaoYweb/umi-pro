@@ -7,6 +7,12 @@
  * validateFields(['keyname'], {force: true} / (err, values) => {} )
  */
 
+ /**
+  * Date DatePicker moment
+  * moment 实例 moment.valueOf() 时间戳 
+  * monent(new Date(时间戳), 'YYYY-MM-DD') DatePicker的 initialValue
+  */
+
 /**
  * 1. 输入url请求 执行 app.js 内部代码 (获取 url query参数中的token 存入redux、localstorage中) -- 触发时机为 第一次渲染页面 或则 刷新 
  * 2. path 匹配 react-router 渲染对应的组件 

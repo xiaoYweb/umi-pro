@@ -29,6 +29,12 @@ const routes = [
         component: './Antd/Table',
       },
       {
+        exact: true,
+        path: '/antd/date',
+        name: 'DatePicker',
+        component: './Antd/DatePicker',
+      },
+      {
         component: './404',
       }
     ]

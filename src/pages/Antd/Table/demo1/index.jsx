@@ -39,13 +39,13 @@ class EditableTable extends React.Component {
         {
           key: '0',
           name: 'Edward King 0',
-          age: '32',
+          age: 32,
           address: 'London, Park Lane no. 0',
         },
         {
           key: '1',
           name: 'Edward King 1',
-          age: '32',
+          age: 32,
           address: 'London, Park Lane no. 1',
         },
       ],
@@ -65,6 +65,7 @@ class EditableTable extends React.Component {
       name: `Edward King ${count}`,
       age: 32,
       address: `London, Park Lane no. ${count}`,
+      special: true
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -83,8 +84,25 @@ class EditableTable extends React.Component {
     this.setState({ dataSource: newData });
   };
 
+  handleValidate = () => {
+    const { dataSource } = this.state;
+    let str = '';
+    dataSource.find(({ age, special }) => {
+      if (age === 0 || age === null || age === undefined) {
+        str = '调整数不能为 0'
+        return true
+      }
+      if (special) {
+        return true
+      }
+      return false
+    })
+    return str;
+  }
+
   getValues = () => {
-    console.log(this.state.dataSource)
+    const result = this.handleValidate()
+    console.log(this.state.dataSource, result)
   }
 
   render() {
@@ -118,7 +136,7 @@ class EditableTable extends React.Component {
         <Button onClick={this.getValues}>getValues</Button>
         <Table
           components={components}
-          
+
           rowClassName={() => 'editable-row'}
           bordered
           dataSource={dataSource}

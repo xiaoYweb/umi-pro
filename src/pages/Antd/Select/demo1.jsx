@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'antd';
+import { Select, Form, Button } from 'antd';
 
 const { Option } = Select;
 
@@ -8,11 +8,17 @@ const selectStyle = {
   marginRight: 10
 }
 
+@Form.create()
 class Demo1 extends React.Component {
   state = {}
 
   handleChange = val => {
     console.log('val', val)
+  }
+
+  handleClick = () => {
+    const res = this.props.form.getFieldsValue()
+    console.log("Demo1 -> handleClick -> res", res)
   }
 
   render() {
@@ -34,6 +40,19 @@ class Demo1 extends React.Component {
       <Select defaultValue="lucy" style={selectStyle} allowClear>
         <Option value="lucy">Lucy</Option>
       </Select>
+      <Form>
+        <Form.Item>
+          {
+           this.props.form.getFieldDecorator('test')(
+            <Select>
+            <Option value="jack-val">Jack</Option>
+            <Option value="lucy-val">Lucy</Option>
+          </Select>
+           ) 
+          }
+        </Form.Item>
+      </Form>
+      <Button onClick={this.handleClick}>button</Button>
     </>);
   }
 }
@@ -41,12 +60,12 @@ class Demo1 extends React.Component {
 export default Demo1;
 
 /**
- * 单选 
- * --> Select 
+ * 单选
+ * --> Select
  * defaultValue="xxx"
  * onChange = { val => void }
- * disabled 
- * loading 
+ * disabled
+ * loading
  * allowClear
  * --> Option
  * value
