@@ -6,8 +6,10 @@ const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const FormIten = Form.Item;
 const dateFormat = 'YYYY-MM-DD';
 
-function onChange(date, dateString) {
-  console.log(date.format(dateFormat), dateString);
+function onChange(
+  // date, dateString
+  ) {
+  // console.log(date.format(dateFormat), dateString);
 }
 
 @Form.create()
@@ -19,9 +21,9 @@ class Demo extends React.Component {
   }
 
   handleClick = () => {
-    const { form: { getFieldsValue } } = this.props;
-    let res = window.m = getFieldsValue()
-    console.log(moment('2020-5-5', dateFormat), '----')
+    // const { form: { getFieldsValue } } = this.props;
+    // let res = window.m = getFieldsValue()
+    // console.log(moment('2020-5-5', dateFormat), '----')
   }
 
   disabledDate = startDate => {

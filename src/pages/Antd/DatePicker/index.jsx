@@ -3,6 +3,10 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Card, Divider } from 'antd';
 import Demo1 from './demo1';
 import Demo2 from './demo2';
+import Demo3 from './demo3';
+import Demo4 from './demo4';
+import Demo5 from './demo5';
+// import Test from './test';
 
 class InputComp extends React.Component {
   constructor(props) {
@@ -18,6 +22,14 @@ class InputComp extends React.Component {
           <Divider dashed />
           <Demo2 />
           <Divider dashed />
+          <Demo3 />
+          <Divider dashed />
+          <Demo4 />
+          <Divider dashed />
+          <Demo5 />
+          <Divider dashed />
+          {/* <Test></Test>
+          <Divider dashed /> */}
         </section>
       </Card>
     </PageHeaderWrapper>);
