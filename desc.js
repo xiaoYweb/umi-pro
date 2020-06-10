@@ -37,3 +37,18 @@
  * 3 登录 成功  跳转 redirectUrl?token=xxxx 
  * 4 请求 接口 返回 没有token 或者 token失效  清除 token及 并跳转的登录页  (axios interceptors response)
  */
+
+ /**
+  * 常用antd组件
+  * input 常规输入 输入模糊搜索点选 
+  * select 单选 多选 输入模糊搜索单选  输入模糊搜索多选
+  * 时间区间 快捷选择 起始终止时间跨度 小于 多少天 
+  * table dataSource coloumns配置 
+  * pagination
+  * form {getFieldDecorator, getFieldsValue, setFieldsValue, resetFields, validateFields } 
+  * modal 
+  * message confirm
+  * 
+  * tabs
+  *  
+  */

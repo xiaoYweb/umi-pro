@@ -22,3 +22,7 @@ class InputComp extends React.Component {
 }
 
 export default InputComp;
+
+/**
+ *  常规输入  文本域  tooltip  前后 fix Icon 密码
+ */
