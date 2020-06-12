@@ -29,10 +29,10 @@ export const requestWithSpin = (url, params) => {
   }
   Toast.loading();
   return http.request(options).then(res => {
-    Toast.loaded();
     return res
   }).catch(err => {
-    Toast.loaded();
     return Promise.reject(err)
+  }).finally(() => {
+    Toast.loaded();
   })
 }

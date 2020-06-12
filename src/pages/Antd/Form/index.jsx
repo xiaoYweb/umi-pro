@@ -4,6 +4,7 @@ import { Card, Divider } from 'antd';
 import Demo1 from './demo1';
 import Demo2 from './demo2';
 import Demo3 from './demo3';
+import Demo4 from './demo4';
 
 class InputComp extends React.Component {
   constructor(props) {
@@ -15,11 +16,13 @@ class InputComp extends React.Component {
     return (<PageHeaderWrapper>
       <Card>
         <section>
-          <Demo1 />
+          {/* <Demo1 />
           <Divider dashed />
           <Demo2 />
-          <Divider dashed />
+          <Divider dashed /> */}
           <Demo3 />
+          <Divider dashed />
+          <Demo4 />
           <Divider dashed />
         </section>
       </Card>

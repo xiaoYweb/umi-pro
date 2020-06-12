@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Card, Form, Row, Col, Input, Select, Button, Table } from 'antd';
 import { connect } from 'dva';
-import classNames from 'classNames';
 import tools from '@/utils/tools';
 import { Link, router } from 'umi';
 import tip from '@/lib/tip';
@@ -21,9 +20,9 @@ class WarehouseManageMentList extends PureComponent {
   }
 
   columns = [
-    { dataIndex: 'id', title: '仓库ID', fixed: 'left', },
-    { dataIndex: 'warehouseName', title: '仓库名称', fixed: 'left' },
-    { dataIndex: 'warehouseCode', title: '仓库编码', },
+    { dataIndex: 'id', title: '仓库ID', fixed: 'left', ellipsis: true, },
+    { dataIndex: 'warehouseName', title: '仓库名称', fixed: 'left', ellipsis: true, },
+    { dataIndex: 'warehouseCode', title: '仓库编码', ellipsis: true, },
     {
       dataIndex: 'address',
       title: '仓库地址',
@@ -33,9 +32,11 @@ class WarehouseManageMentList extends PureComponent {
     },
     {
       title: '经纬度',
+      width: 180,
+      ellipsis: true,
       render: ({ latitude, longitude }) => (<>
-        <div>{latitude}</div>
-        <div>{longitude}</div>
+        <span>{latitude}</span>,
+        <span>{longitude}</span>
       </>)
     },
     {
@@ -59,12 +60,14 @@ class WarehouseManageMentList extends PureComponent {
     },
     { dataIndex: '', title: '可存储类目', },
     {
+      width: 180,
       dataIndex: 'contactList',
       title: '联系人',
+      ellipsis: true,
       render: contactList => contactList && contactList.map(item => (
-        <p className={styles.contact} key={item.userId}>
+        <span className={styles.contact} key={item.userId}>
           {item.userName}({item.phone})
-        </p>
+        </span>
       )),
     },
     {
@@ -97,7 +100,7 @@ class WarehouseManageMentList extends PureComponent {
     {
       dataIndex: 'gmtModified',
       title: '更新时间',
-      render: key => tools.formatDate(key)
+      render: key => tools.formatDate(key).substr(0, 10)
     },
     { dataIndex: '', title: '备操作人注', },
     {
@@ -105,7 +108,7 @@ class WarehouseManageMentList extends PureComponent {
       fixed: 'right',
       render: ({ id, status }) => (
         <span>
-          <Link to={`/my/warehousemanagement/detail/${id}`} className="mr-5">查看</Link>
+          <Link to={`/my/warehousemanagement/check/${id}`} className="mr-5">查看</Link>
           <Link to={`/my/warehousemanagement/edit/${id}`} className="mr-5">编辑</Link>
           {status === 'START_USING'
             ? (
@@ -127,7 +130,19 @@ class WarehouseManageMentList extends PureComponent {
   ]
 
   componentDidMount() {
+    this.handleInitOptionValue()
     this.requestList()
+  }
+
+  handleInitOptionValue = () => { // 搜索条件 回显 / 初始化
+    const { record, form: { setFieldsInitialValue } } = this.props;
+    record && setFieldsInitialValue(record)
+  }
+
+  handleBackupOptionValue = () => { // 备份 搜索条件
+    const { dispatch, form: { getFieldsValue } } = this.props;
+    const options = getFieldsValue()
+    dispatch({ type: 'mywarehouse/updateState', payload: { record: options } })
   }
 
   handleSearch = () => {
@@ -138,21 +153,22 @@ class WarehouseManageMentList extends PureComponent {
 
   requestList = () => {
     const { dispatch, form: { getFieldsValue } } = this.props;
-    const { pageNum, pagesize } = this.state;
+    const { pageNum, pageSize } = this.state;
     const options = getFieldsValue()
     dispatch({
       type: 'mywarehouse/requestWarehouseList',
-      payload: { ...options, pageNum, pagesize }
+      payload: { ...options, pageNum, pageSize }
     })
   }
 
-  handleChangeTable = ({ current: pageNum, pagesize }) => {
-    this.setState({ pageNum, pagesize }, () => {
+  handleChangeTable = ({ current: pageNum, pageSize }) => {
+    this.setState({ pageNum, pageSize }, () => {
       this.requestList()
     })
   }
 
   createWarehouse = () => {
+    this.handleBackupOptionValue()
     router.push('/my/warehousemanagement/create')
   }
 
@@ -179,9 +195,9 @@ class WarehouseManageMentList extends PureComponent {
   }
 
   handleRemove = id => {
-    const { dispatch } = this.props;
     tip.confirm('确定要删除此仓库吗？', {
       onOk: () => {
+        const { dispatch } = this.props;
         dispatch && dispatch({
           type: 'mywarehouse/requestWarehousRemove',
           id,
@@ -202,73 +218,87 @@ class WarehouseManageMentList extends PureComponent {
     return (
       <PageHeaderWrapper>
         <Card bodyStyle={{ padding: 16 }} bordered={false}>
-          <section className="flex fyc">
-            <Form labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-              <Row gutters={12} >
-                <Col span={5}>
-                  <FormItem label="仓库编码">
-                    {getFieldDecorator('warehouseCode')(
-                      <Input maxLength={50} placeholder="请输入" />
-                    )}
-                  </FormItem>
-                </Col>
-                <Col span={5}>
-                  <FormItem label="仓库名称">
-                    {getFieldDecorator('warehouseName')(
-                      <Input maxLength={50} placeholder="请输入" />
-                    )}
-                  </FormItem>
-                </Col>
-                <Col span={4}>
-                  <FormItem label="类型">
-                    {getFieldDecorator('belongTo')(
-                      <Select placeholder="请选择">
-                        <Option value="">全部</Option>
-                        <Option value={1}>自营仓</Option>
-                        <Option value={2}>三方仓</Option>
-                        <Option value={3}>云仓</Option>
-                      </Select>
-                    )}
-                  </FormItem>
-                </Col>
-                <Col span={6}>
-                  <FormItem label="是否虚拟仓">
-                    {getFieldDecorator('buildType')(
-                      <Select placeholder="请选择">
-                        <Option value="">全部</Option>
-                        <Option value={2}>是</Option>
-                        <Option value={1}>否</Option>
-                      </Select>
-                    )}
-                  </FormItem>
-                </Col>
-                <Col span={4}>
-                  <FormItem label="状态">
-                    {getFieldDecorator('status')(
-                      <Select placeholder="请选择">
-                        <Option value="">全部</Option>
-                        <Option value={0}>草稿</Option>
-                        <Option value={1}>审核中</Option>
-                        <Option value={2}>审核不通过</Option>
-                        <Option value={3}>审核通过</Option>
-                        <Option value={4}>启用</Option>
-                        <Option value={5}>停用</Option>
-                      </Select>
-                    )}
-                  </FormItem>
-                </Col>
-              </Row>
-            </Form>
-            <div className={classNames(styles['btn-area'], 'flex')}>
-              <Button type="primary" onClick={this.handleSearch}>查询</Button>
-              <Button type="primary" icon="plus" onClick={this.createWarehouse}>新建仓库</Button>
-            </div>
-          </section>
+          <Form labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
+
+            <Row gutter={12}>
+              <Col span={20}>
+                <Row gutters={12} >
+                  <Col span={5}>
+                    <FormItem label="仓库编码">
+                      {getFieldDecorator('warehouseCode')(
+                        <Input maxLength={50} placeholder="请输入" />
+                      )}
+                    </FormItem>
+                  </Col>
+                  <Col span={5}>
+                    <FormItem label="仓库名称">
+                      {getFieldDecorator('warehouseName')(
+                        <Input maxLength={50} placeholder="请输入" />
+                      )}
+                    </FormItem>
+                  </Col>
+                  <Col span={4}>
+                    <FormItem label="类型">
+                      {getFieldDecorator('belongTo')(
+                        <Select placeholder="请选择">
+                          <Option value="">全部</Option>
+                          <Option value={1}>自营仓</Option>
+                          <Option value={2}>三方仓</Option>
+                          <Option value={3}>云仓</Option>
+                        </Select>
+                      )}
+                    </FormItem>
+                  </Col>
+                  <Col span={6}>
+                    <FormItem label="是否虚拟仓">
+                      {getFieldDecorator('buildType')(
+                        <Select placeholder="请选择">
+                          <Option value="">全部</Option>
+                          <Option value={2}>是</Option>
+                          <Option value={1}>否</Option>
+                        </Select>
+                      )}
+                    </FormItem>
+                  </Col>
+                  <Col span={4}>
+                    <FormItem label="状态">
+                      {getFieldDecorator('status')(
+                        <Select placeholder="请选择">
+                          <Option value="">全部</Option>
+                          <Option value={0}>草稿</Option>
+                          <Option value={1}>审核中</Option>
+                          <Option value={2}>审核不通过</Option>
+                          <Option value={3}>审核通过</Option>
+                          <Option value={4}>启用</Option>
+                          <Option value={5}>停用</Option>
+                        </Select>
+                      )}
+                    </FormItem>
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={4}>
+                {/* <Row gutter={12}>
+                  <Col span={8}>
+                  <Button type="primary" onClick={this.handleSearch}>查询</Button>
+                  </Col>
+                  <Col span={16}>
+                  <Button type="primary" icon="plus" onClick={this.createWarehouse}>新建仓库</Button>
+                  </Col>
+                </Row> */}
+                <div className={styles['btn-area']}>
+                  <Button type="primary" onClick={this.handleSearch}>查询</Button>
+                  <Button type="primary" icon="plus" onClick={this.createWarehouse}>新建仓库</Button>
+                </div>
+              </Col>
+            </Row>
+          </Form>
+
           <Table
             rowKey="id"
             dataSource={list}
             columns={this.columns}
-            scroll={{ x: 2300 }}
+            scroll={{ x: 2500 }}
             onChange={this.handleChangeTable}
             loading={tableLoading}
             pagination={{

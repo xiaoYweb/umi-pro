@@ -3,11 +3,29 @@ import { Form, DatePicker, Button } from 'antd';
 import moment from 'moment';
 
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
-const FormIten = Form.Item;
+const FormItem = Form.Item;
 const dateFormat = 'YYYY-MM-DD';
+const lastWeek = [moment().subtract('days', 7), moment()];
+
 
 function onChange(date, dateString) {
   console.log(date, dateString);
+}
+
+function disabledDate(startDate) {
+  if (!startDate) return false
+  const timestamp = Date.now();
+  const startTimestamp = startDate.valueOf();
+  return startTimestamp > timestamp;
+}
+
+function dateValidator(rule, value, callback) {
+  const weekTimestamp = 7 * 24 * 3600 * 1000;
+  if (value[1].valueOf() - value[0].valueOf() > weekTimestamp) {
+    callback('查询时间跨度最大为7天')
+    return
+  }
+  callback()
 }
 
 @Form.create()
@@ -33,18 +51,35 @@ class Demo extends React.Component {
         <Button onClick={this.handleClick}>
           Button
         </Button>
-        <FormIten>
+        <FormItem>
           {getFieldDecorator('date', {
             initialValue: moment(new Date(1591238107875), dateFormat)
           })(
             <DatePicker onChange={onChange} />
           )}
-        </FormIten>
+        </FormItem>
 
         <br />
         <MonthPicker onChange={onChange} placeholder="Select month" />
         <br />
-        <RangePicker onChange={onChange} />
+        <FormItem>
+          {
+            getFieldDecorator('daterange', {
+              rules: [
+                { validator: dateValidator }
+              ]
+            })(
+              <RangePicker
+                disabledDate={disabledDate}
+                ranges={{
+                  '过去一周': lastWeek,
+                }}
+                showTime
+                format="YYYY/MM/DD HH:mm"
+              />
+            )
+          }
+        </FormItem>
         <br />
         <WeekPicker onChange={onChange} placeholder="Select week" />
       </Form>);
