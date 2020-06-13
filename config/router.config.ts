@@ -122,6 +122,12 @@ const routes: IRoute[] = [
                 component: './My/WarehouseManagement/Detail',
               },
               {
+                exact: true,
+                path: '/my/purchase/list',
+                name: '采购入库单',
+                component: './My/Purchase/List',
+              },
+              {
                 component: './404',
               }
             ]
