@@ -1,0 +1,40 @@
+.main-style {
+  padding-bottom: 20px;
+
+  :global {
+    .ant-form-item {
+      margin-bottom: 0;
+    }
+
+    .search-area { // 搜索 重置 区域样式 全局风格 放置于第一行 搜索条件 右边
+      padding-top: 4px;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        margin-right: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    
+    .btn-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      margin-bottom: 20px;
+      &>div {
+        display: flex;
+        align-items: center;
+      }
+      button {
+        margin-right: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  
+}

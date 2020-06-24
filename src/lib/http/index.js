@@ -22,6 +22,16 @@ export const post = (url, data, config) => {
   return http.request(options).then(thenCallback)
 }
 
+export const requestExcel = (url, data) => {
+  const options = {
+    method: 'post',
+    url,
+    data,
+    responseType: 'blob'
+  }
+  return http.request(options)
+}
+
 export const requestWithSpin = (url, params) => {
   const options = {
     method: 'get',

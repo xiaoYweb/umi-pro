@@ -7,22 +7,22 @@ import Demo3 from './demo3';
 import Demo4 from './demo4';
 
 class InputComp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
+  state = {
+    index: 0
   }
 
   render() {
+    const { index } = this.state;
     return (<PageHeaderWrapper>
       <Card>
         <section>
-          {/* <Demo1 />
-          <Divider dashed />
-          <Demo2 />
-          <Divider dashed /> */}
-          <Demo3 />
-          <Divider dashed />
-          <Demo4 />
+          {
+            index === 1 ? <Demo1 />
+            : index === 2 ? <Demo2 />
+            : index === 3 ? <Demo3 />
+            : index === 4 ? <Demo4 />
+            : null
+          }
           <Divider dashed />
         </section>
       </Card>

@@ -136,7 +136,6 @@ class EditableTable extends React.Component {
         <Button onClick={this.getValues}>getValues</Button>
         <Table
           components={components}
-
           rowClassName={() => 'editable-row'}
           bordered
           dataSource={dataSource}

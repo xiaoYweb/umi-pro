@@ -1,13 +1,13 @@
 // 入库
 import config from '@/config';
-import { post } from '@/lib/http';
+import { post, requestExcel } from '@/lib/http';
 
 function getWhid() {
   return 101 || localStorage.getItem(config.WAREHOUSE_ID_KEY);
 }
 
 /**
- * 供应商管理列表（分页）
+ * 
  * @param {object} params
  * @return {Promise<any>}
  */
@@ -18,17 +18,17 @@ function getWhid() {
     "bizBillNo": "DV00000001",  到货通知单号
     "inStorageNo": "POI000001", 收货入库单
     "skuId": "skuID", 商品编码
-    "operator": 1,
-    "orderType": "1:采购入库,2:调拨入库,3:客退入库",
-    "pageNum": "1L",
-    "pageSize": "20L",
-    "status": "CANCEL", 入库单的状态
     "supplierCode": "string",
-    "warehouseId": 101,
+    "orderType": "1:采购入库,2:调拨入库,3:客退入库",
+    "status": "CANCEL", 入库单的状态
     "arrivalPlanTimeBeginTime": "yyyy-MM-dd HH:mm:ss",  计划到货时间
     "arrivalPlanTimeEndTime": "yyyy-MM-dd HH:mm:ss",  计划到货时间
     "createdBeginTime": "yyyy-MM-dd HH:mm:ss",  单据生成时间
     "createdEndTime": "yyyy-MM-dd HH:mm:ss",  单据生成时间
+    "pageNum": "1",
+    "pageSize": "10",
+    "warehouseId": 101,
+    "operator": 1,
   }
  */
 export async function getInStorageList(params: object) {
@@ -50,6 +50,8 @@ export async function getInStorageDetail(params: object) {
     warehouseId: getWhid(),
   });
 }
+
+
 /**
  *  CANCEL(0, "已取消"),
     NOTICE(1, "已通知"),
@@ -120,7 +122,7 @@ export async function listPrint(params: object) {
 
 export async function listExport(params: object) {
   const url = '/wms/public/inWare/purchaseInStorageOrder/exportHeaders';
-  return post(url, {
+  return requestExcel(url, {
     ...params,
     warehouseId: getWhid(),
   });
@@ -128,13 +130,13 @@ export async function listExport(params: object) {
 
 export async function detailExport(params: object) {
   const url = '/wms/public/inWare/purchaseInStorageOrder/exportItems';
-  return post(url, {
+  return requestExcel(url, {
     ...params,
     warehouseId: getWhid(),
-  }, 'blob');
+  });
 }
 
-// 收货装箱单
+// 收货验收单
 /**
  * 
  * @param params {
@@ -148,26 +150,18 @@ export async function detailExport(params: object) {
     "operator": 1,
   }
  */
-export async function getPackageList(params: object) {
+export async function getReceiptList(params: object) {
   const url = '/wms/public/inWare/acceptance/pageList';
-  const option: any = {
-    responseType: 'blob'
-  }
   return post(url, {
     ...params,
     warehouseId: getWhid(),
-    option
   });
 }
 
-export async function packageListExport(params: object) {
+export async function exportReceiptList(params: object) {
   const url = '/wms/public/inWare/acceptance/export';
-  const option: any = {
-    responseType: 'blob'
-  }
-  return post(url, {
+  return requestExcel(url, {
     ...params,
     warehouseId: getWhid(),
-    option
   });
 }

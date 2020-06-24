@@ -5,25 +5,32 @@ const routes = [
     icon: 'setting',
     routes: [
       {
-        exact: true,
         path: '/my/warehousemanagement',
         name: '仓库管理',
         component: './My/WarehouseManagement',
       },
       {
-        exact: true,
         path: '/my/warehousemanagement/check/:id',
         component: './My/WarehouseManagement/Detail',
       },
       {
-        exact: true,
         path: '/my/warehousemanagement/create',
         component: './My/WarehouseManagement/Detail',
       },
       {
-        exact: true,
         path: '/my/warehousemanagement/edit/:id',
         component: './My/WarehouseManagement/Detail',
+      },
+      {
+        path: '/my/instorage',
+        name: '采购入库单',
+        component: './My/InStorage',
+      },
+      {
+        hideInMenu: true,
+        path: '/my/instorage/detail/:id',
+        name: '入库单详情',
+        component: './My/InStorage/Detail',
       },
       {
         component: './404',

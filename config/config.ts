@@ -44,7 +44,7 @@ const config: IConfig =  {
         }
         : false,
       title: '辛橙仓库管理系统',
-      dll: true,
+      // dll: true,
 
       routes: {
         exclude: [

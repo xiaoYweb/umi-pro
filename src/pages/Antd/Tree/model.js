@@ -1,4 +1,4 @@
-import { Toast } from '@/lib/Toast';
+import Toast from '@/lib/Toast';
 import { getLocations } from './serveice';
 
 const model = {

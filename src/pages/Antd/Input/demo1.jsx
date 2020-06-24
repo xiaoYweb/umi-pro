@@ -1,8 +1,7 @@
 import React from 'react';
 import { InputNumber, Form, Button } from 'antd';
 
-function onChange(value) {
-  console.log('changed', value, typeof value);
+function onChange() {
 }
 const FormItem = Form.Item;
 const inputStyle = {
@@ -16,8 +15,7 @@ class Demo extends React.Component {
   state = {}
 
   handleFormat = num => {
-  console.log("Demo -> num", num, num === '0')
-    if (num == '0') return `${num} 值不允许为 0`
+    if (num === 0) return `${num} 值不允许为 0`
     return num;
   }
 
@@ -27,8 +25,7 @@ class Demo extends React.Component {
   }
 
   handleSubmit = () => {
-    const res = this.props.form.getFieldsValue()
-    console.log("Demo -> handleSubmit -> res", res)
+    // const res = this.props.form.getFieldsValue()
   }
 
   render() {
