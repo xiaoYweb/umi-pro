@@ -63,7 +63,7 @@ class WarehouseManageDetail extends PureComponent {
   }
 
   handleCancel = () => {
-    router.push('/my/warehousemanagement/list')
+    router.push('/my/warehousemanagement')
   }
 
   render() {

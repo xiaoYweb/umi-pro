@@ -6,7 +6,6 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import HouseSwitch from '@/components/HouseSwitch';
 import WareHouseModal from '@/components/WareHouseModal';
 
-
 @connect(({ global, settings }) => ({
   collapsed: global.collapsed,
   settings,
@@ -109,6 +108,7 @@ class BasicLayout extends Component {
           {...settings}
         >
           {children}
+
         </ProLayout>
         <WareHouseModal />
       </>

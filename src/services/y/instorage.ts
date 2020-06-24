@@ -123,7 +123,7 @@ export async function listExport(params: object) {
   return post(url, {
     ...params,
     warehouseId: getWhid(),
-  }, );
+  });
 }
 
 export async function detailExport(params: object) {

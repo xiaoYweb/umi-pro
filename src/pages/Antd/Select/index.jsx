@@ -1,7 +1,6 @@
 import React from 'react';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Card, Divider } from 'antd';
-import { router } from 'umi';
+import { Divider } from 'antd';
+import Wrap from '@/components/Wrap';
 import Demo1 from './demo1';
 import Demo2 from './demo2';
 import Demo3 from './demo3';
@@ -12,30 +11,22 @@ import Demo15 from './demo15';
 class SelectComp extends React.Component {
   state = {}
 
-  navBack = () => {
-    router.push('/antd/input')
-  }
-
   render() {
-    return (<PageHeaderWrapper onBack={this.navBack} >
-      <Card>
-        <section>
-          <Demo1 />
-          <Divider dashed />
-          <Demo2 />
-          <Divider dashed />
-          <Demo3 />
-          <Divider dashed />
-          <Demo4 />
-          <Divider dashed />
-          <Demo5 />
-          <Divider dashed />
-          <Demo15 />
-          <Divider dashed />
-        </section>
-      </Card>
-
-    </PageHeaderWrapper>);
+    return (
+      <Wrap>
+        <Demo1 />
+        <Divider dashed />
+        <Demo2 />
+        <Divider dashed />
+        <Demo3 />
+        <Divider dashed />
+        <Demo4 />
+        <Divider dashed />
+        <Demo5 />
+        <Divider dashed />
+        <Demo15 />
+        <Divider dashed />
+      </Wrap>);
   }
 }
 
