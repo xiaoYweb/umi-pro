@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { Form, Card, Row, Col } from 'antd';
+import { Form, Card, Row, Col, Table } from 'antd';
 import { connect } from 'dva';
 import { Link } from 'umi';
 import MySelect from '@/components/SearchOptions/Select';
@@ -31,12 +31,18 @@ const columns = [
   }
 ]
 function Purchase({ form, dispatch }) {
-  const [buyerList, setBuyerList] = useState()
-  const [buyerLoading, setBuyerLoading] = useState()
+  const [buyerList, setBuyerList] = useState([])
+  const [buyerLoading, setBuyerLoading] = useState(false)
 
-  const handleBuyerSearch = val => {
-
-  }
+  const handleBuyerSearch = useCallback(debounce(val => {
+    setBuyerLoading(true)
+    setBuyerList([])
+    fetchProductList(val).then(res => {
+      const list = res.map(item => ({ ...item, id: item.value }))
+      setBuyerList(list)
+      setBuyerLoading(false)
+    })
+  }))
 
   return (<PageHeaderWrapper className="page-wrapper">
     <Card bodyStyle={{ padding: 24 }} bordered={false}>
@@ -48,6 +54,9 @@ function Purchase({ form, dispatch }) {
         </Row>
 
       </Form>
+      <Table
+
+      />
     </Card>
   </PageHeaderWrapper>)
 }
@@ -84,22 +93,22 @@ const handleSearch = debounce((
   })
 }, 300);
 
-// function fetchProductList(n = 3) {
-//   const result = [
-//     { value: 1, label: '产品1' },
-//     { value: 2, label: '产品2' },
-//     { value: 3, label: '产品3' },
-//     { value: 4, label: '产品4' },
-//     { value: 5, label: '产品5' },
-//     { value: 6, label: '产品6' },
-//   ]
+function fetchProductList(n = 3) {
+  const result = [
+    { value: 1, label: '产品1' },
+    { value: 2, label: '产品2' },
+    { value: 3, label: '产品3' },
+    { value: 4, label: '产品4' },
+    { value: 5, label: '产品5' },
+    { value: 6, label: '产品6' },
+  ]
 
-//   return new Promise(resolve => {
-//     setTimeout(() => {
-//       resolve(result.slice(0, n))
-//     }, 300)
-//   })
-// }
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(result.slice(0, n))
+    }, 300)
+  })
+}
 
 function debounce(fn, delay = 300) {
   let timer;
