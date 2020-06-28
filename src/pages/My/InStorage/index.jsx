@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import { connect } from 'dva';
-import { Form, Row, Col, Input, Select, DatePicker, Button, Table } from 'antd';
+import { Form, Row, Col, Input, Select, DatePicker, Button, Table, Checkbox } from 'antd';
 import { Link } from 'umi';
 import Wrap from '@/components/Wrap';
 import Loading from '@/components/Loading';
 import Toast from '@/lib/Toast';
-// import styles from './index.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -143,18 +142,6 @@ class InStorage extends PureComponent {
     window.scrollTo(0, 0);
   }
 
-  handlePageChange = pagination => { // 切换 采购入库单列表 页码
-    const payload = {
-      ...this.state, // 存在 pageSize 变化 pageNum不变化情况 覆盖一遍比较稳妥
-      pageNum: pagination.current,
-      pageSize: pagination.pageSize,
-      selectedRowKeys: [], // 覆盖已选项
-    };
-    this.setState(payload, () => {
-      this.requestList()
-    });
-  }
-
   handleSearch = () => { // 搜索操作
     // const res = this.props.form?.getFieldsValue()
     this.setState({ pageNum: 1 }, () => {
@@ -165,6 +152,18 @@ class InStorage extends PureComponent {
   handleReset = () => { // 重置操作
     this.props.form.resetFields()
     this.handleSearch()
+  }
+
+  handlePageChange = pagination => { // 切换 采购入库单列表 页码
+    const payload = {
+      ...this.state, // 存在 pageSize 变化 pageNum不变化情况 覆盖一遍比较稳妥
+      pageNum: pagination.current,
+      pageSize: pagination.pageSize,
+      selectedRowKeys: [], // 覆盖已选项
+    };
+    this.setState(payload, () => {
+      this.requestList()
+    });
   }
 
   onSelectChange = selectedRowKeys => {
@@ -336,8 +335,7 @@ class InStorage extends PureComponent {
             <Button type="primary" disabled={!canOperate} onClick={this.handlePrint}>收货交接单打印</Button>
             <Button type="primary" disabled={!canOperate} onClick={this.handleExport}>单据导出</Button>
             <Button type="primary" disabled={!canOperate} onClick={this.handleDetailExport}>明细导出</Button>
-            {/* <Checkbox checked={isAllSelected} 
-              onChange={this.handleSelectAll}>全选</Checkbox> */}
+            <Checkbox value={isAllSelected} onChange={this.handleSelectAll}>全选</Checkbox>
           </div>
         </div>
       </Form>
@@ -349,6 +347,7 @@ class InStorage extends PureComponent {
           rowSelection={rowSelection}
           loading={tableLoading}
           pagination={{
+            // pageSizeOptions: ['2', '3', '10'],
             current: pageNum,
             pageSize,
             total,

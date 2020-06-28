@@ -7,7 +7,8 @@ class Wrap extends PureComponent {
   state = {}
 
   render() {
-    return (<PageHeaderWrapper>
+    const { handleBack, title } = this.props;
+    return (<PageHeaderWrapper onBack={handleBack} title={title}>
       <Card bordered={false} className={styles['main-style']}>
         {
           this.props.children
