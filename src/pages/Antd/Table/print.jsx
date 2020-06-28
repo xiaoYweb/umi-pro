@@ -75,7 +75,7 @@ class PrintArea extends PureComponent {
         </li>
       </ul>
 
-      <table className={styles['table-area']} border="1">
+      {/* <table className={styles['table-area']} border="1">
         <tr>
           <th>Month</th>
           <th>Savings</th>
@@ -83,6 +83,35 @@ class PrintArea extends PureComponent {
         <tr>
           <td>January</td>
           <td>$100</td>
+        </tr>
+      </table> */}
+      <table border="1" className={styles['table-area']}>
+        <tr>
+          <td>&nbsp;</td>
+          <td>t1</td>
+          <td>t2</td>
+          <td>t3</td>
+          <td>t4</td>
+          <td>t5</td>
+          <td>t6</td>
+        </tr>
+        <tr>
+          <td>r1</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>r2</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
         </tr>
       </table>
       {/* <Table
