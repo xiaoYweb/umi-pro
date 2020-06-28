@@ -1,5 +1,7 @@
 import { IRoute } from 'umi-types';
 import antdRoutes from './routes/antd';
+import myRoutes from './routes/my';
+import hookRoutes from './routes/hook';
 
 const routes: IRoute[] = [
   {
@@ -95,43 +97,8 @@ const routes: IRoute[] = [
               },
             ]
           },
-          {
-            path: '/my',
-            name: '我的',
-            icon: 'setting',
-            routes: [
-              {
-                exact: true,
-                path: '/my/warehousemanagement/list',
-                name: '仓库管理',
-                component: './My/WarehouseManagement/List',
-              },
-              {
-                exact: true,
-                path: '/my/warehousemanagement/check/:id',
-                component: './My/WarehouseManagement/Detail',
-              },
-              {
-                exact: true,
-                path: '/my/warehousemanagement/create',
-                component: './My/WarehouseManagement/Detail',
-              },
-              {
-                exact: true,
-                path: '/my/warehousemanagement/edit/:id',
-                component: './My/WarehouseManagement/Detail',
-              },
-              {
-                exact: true,
-                path: '/my/purchase/list',
-                name: '采购入库单',
-                component: './My/Purchase/List',
-              },
-              {
-                component: './404',
-              }
-            ]
-          },
+          ...myRoutes,
+          ...hookRoutes,
           ...antdRoutes,
           {
             component: './404',

@@ -12,7 +12,6 @@ class EditableCell extends React.Component {
     editing: false,
   };
 
-
   toggleEdit = () => {
     const editing = !this.state.editing;
     this.setState({ editing }, () => {
@@ -105,13 +104,16 @@ class EditableCell extends React.Component {
       children,
       ...restProps
     } = this.props;
+    console.log(restProps)
     return (
       <td {...restProps}>
-        {editable ? (
-          <EditableContext.Consumer>{this.renderCell}</EditableContext.Consumer>
-        ) : (
-            children
-          )}
+        {
+          editable
+            ? (<EditableContext.Consumer>
+              {this.renderCell}
+            </EditableContext.Consumer>)
+            : children
+        }
       </td>
     );
   }

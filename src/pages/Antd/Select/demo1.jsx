@@ -17,8 +17,8 @@ class Demo1 extends React.Component {
   }
 
   handleClick = () => {
-    const res = this.props.form.getFieldsValue()
-    console.log("Demo1 -> handleClick -> res", res)
+    // const res = this.props.form.getFieldsValue()
+    // console.log("Demo1 -> handleClick -> res", res)
   }
 
   render() {

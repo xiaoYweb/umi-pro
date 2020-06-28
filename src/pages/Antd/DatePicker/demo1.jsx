@@ -37,10 +37,10 @@ class Demo extends React.Component {
   }
 
   handleClick = () => {
-    const { form: { getFieldsValue } } = this.props;
-    let res = window.m = getFieldsValue()
-    const m = moment(new Date())
-    console.log(moment('2020-5-5', dateFormat), '----', m.format(dateFormat))
+    // const { form: { getFieldsValue } } = this.props;
+    // let res = window.m = getFieldsValue()
+    // const m = moment(new Date())
+    // console.log(moment('2020-5-5', dateFormat), '----', m.format(dateFormat))
   }
 
   render() {

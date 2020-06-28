@@ -6,7 +6,6 @@ import RightContent from '@/components/GlobalHeader/RightContent';
 import HouseSwitch from '@/components/HouseSwitch';
 import WareHouseModal from '@/components/WareHouseModal';
 
-
 @connect(({ global, settings }) => ({
   collapsed: global.collapsed,
   settings,
@@ -81,6 +80,7 @@ class BasicLayout extends Component {
               return defaultDom;
             }
             // return <div onClick={() => this.handleNav(menuItemProps.path)}>{defaultDom}</div>
+            // return <a href={`/#${menuItemProps.path}`} target="_blank">{defaultDom}</a>
             return <Link to={menuItemProps.path}>{defaultDom}</Link>;
           }}
 
@@ -108,6 +108,7 @@ class BasicLayout extends Component {
           {...settings}
         >
           {children}
+
         </ProLayout>
         <WareHouseModal />
       </>

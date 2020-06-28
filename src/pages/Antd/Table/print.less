@@ -1,0 +1,49 @@
+.print-area {
+  ul, li {
+    padding: 0; 
+    margin: 0;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      width: 33%;
+    }
+  }
+  h3 {
+    font-weight: 400;
+    & > span:nth-of-type(1) {
+      margin-right: 10px;
+    }
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+.table-area {
+  margin-bottom: 20px;
+}
+
+.sign-area {
+  display: flex;
+  justify-content: flex-end;
+  
+  & > li {
+    display: flex;
+    margin-left: 10px;
+    & > span:nth-of-type(2) {
+      width: 100px;
+      margin-left: 5px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.65);
+    }
+  }
+}
+
+
+
+.page {
+	break-after: page;
+	page-break-after: always;
+}

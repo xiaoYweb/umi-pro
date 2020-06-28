@@ -9,14 +9,25 @@ export const get = (url, params) => {
     url,
     params
   }
-  return http.request(options)
+  return http.request(options).then(thenCallback)
 }
 
-export const post = (url, data) => {
+export const post = (url, data, config) => {
   const options = {
     method: 'post',
     url,
-    data
+    data,
+    ...config
+  }
+  return http.request(options).then(thenCallback)
+}
+
+export const requestExcel = (url, data) => {
+  const options = {
+    method: 'post',
+    url,
+    data,
+    responseType: 'blob'
   }
   return http.request(options)
 }
@@ -28,11 +39,16 @@ export const requestWithSpin = (url, params) => {
     params
   }
   Toast.loading();
-  return http.request(options).then(res => {
-    return res
-  }).catch(err => {
-    return Promise.reject(err)
-  }).finally(() => {
+  return http.request(options).then(thenCallback).finally(() => {
     Toast.loaded();
   })
+}
+
+function thenCallback(res) {
+  const { status, message } = res;
+  if (!status) {
+    Toast.error(message)
+    return Promise.reject(message)
+  }
+  return res
 }

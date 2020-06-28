@@ -106,7 +106,9 @@ class WarehouseManageMentList extends PureComponent {
     {
       title: '操作',
       fixed: 'right',
+      
       render: ({ id, status }) => (
+        
         <span>
           <Link to={`/my/warehousemanagement/check/${id}`} className="mr-5">查看</Link>
           <Link to={`/my/warehousemanagement/edit/${id}`} className="mr-5">编辑</Link>

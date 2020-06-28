@@ -11,7 +11,6 @@ const {
 
 class HttpRequest {
   constructor() {
-    
     // 由于登录为 其他网址 跳转并携带token 然后 app.js 代码执行 将 token 设置到 localStorage 此为前提 然后才是 页面内部的组件渲染 调用 http请求
     this.token = localStorage.getItem(TOKEN_KEY) 
     // this.userId = localStorage.getItem(USER_ID_KEY)

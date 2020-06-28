@@ -11,10 +11,10 @@ const HTTP_STATUS_TEXT = {
 }
 
 function interceptors(instance) {
-  const { xhr, userId: operator } = instance;
+  const { xhr } = instance;
   xhr.interceptors.request.use(requestConfig => {
     const { method } = requestConfig;
-
+    const { userId: operator } = instance;
     const re = /put|post|patch/; // 这3中请求方式 使用data字段
     // get post 请求参数中加入 这个operator 操作人 参数
     if (re.test(method)) {

@@ -22,5 +22,6 @@ module.exports = {
     'react/no-access-state-in-setstate': 0,
     'import/no-extraneous-dependencies': 0,
     'jsx-a11y/anchor-has-content': 0,
+    'no-param-reassign': 0, // map(item => {item.xxx = xxx})
   },
 };
