@@ -6,6 +6,7 @@ import { router } from 'umi';
 import Demo1 from './demo1';
 import Demo2 from './demo2';
 import PrintArea from './print';
+import styles from './print.less';
 
 class SelectComp extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class SelectComp extends React.Component {
   }
 
   state = {
-    index: 1
+    index: 3
   }
 
   navBack = () => {
@@ -28,18 +29,26 @@ class SelectComp extends React.Component {
         <section>
           {
             index === 1 ? <Demo1 />
-              : index === 2 ? <Demo2 />
-                : <>
-                  <PrintArea ref={this.componentRef} />
-                  <ReactToPrint
-                    trigger={() => {
-                      // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-                      // to the root node of the returned component as it will be overwritten.
-                      return <Button>Print</Button>;
-                    }}
-                    content={() => this.componentRef?.current}
-                  />
-                </>
+            : index === 2 ? <Demo2 />
+            : <>
+            <ul ref={this.componentRef} >
+              <li className={styles.page}>
+                <PrintArea />
+              </li>
+              <li className={styles.page}>
+                <PrintArea />
+              </li>
+            </ul>
+              
+              <ReactToPrint
+                trigger={() => {
+                  // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                  // to the root node of the returned component as it will be overwritten.
+                  return <Button>Print</Button>;
+                }}
+                content={() => this.componentRef?.current}
+              />
+            </>
           }
           <Divider dashed />
         </section>
