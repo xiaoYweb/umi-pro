@@ -1,54 +1,22 @@
 import React, { PureComponent } from 'react';
-import { Table, Descriptions } from 'antd';
+import classnames from 'classnames';
 import styles from './print.less';
-
-const dataSource = [
-  {
-    key: '1',
-    name: '胡彦斌',
-    age: 32,
-    address: '西湖区湖底公园1号',
-  },
-  {
-    key: '2',
-    name: '胡彦祖',
-    age: 42,
-    address: '西湖区湖底公园1号',
-  },
-];
-
-const columns = [
-  {
-    title: '姓名',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: '年龄',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: '住址',
-    dataIndex: 'address',
-    key: 'address',
-  },
-];
 
 class PrintArea extends PureComponent {
   tableBodder = true;
 
   render() {
     return (<section style={{ padding: 30 }} className={styles['print-area']}>
-      <h2>收货交接单</h2>
+      <h2 className="mb-20">收货交接单</h2>
 
-      <div>
+      <div className="mb-10">
         <h3>
           <span>收货仓库:</span>
           <span>W001   广州服装仓</span>
         </h3>
       </div>
-      <ul>
+      
+      <ul className={classnames(styles['title-area'], 'mb-20')}>
         <li>
           <h3>
             <span>到货通知单号:</span>
@@ -64,7 +32,7 @@ class PrintArea extends PureComponent {
         <li>
           <h3>
             <span>供应商:</span>
-            <span>G023 上海xxx服饰有限公司</span>
+            <span>G023上海xxx服饰有限公司</span>
           </h3>
         </li>
         <li>
@@ -75,53 +43,66 @@ class PrintArea extends PureComponent {
         </li>
       </ul>
 
-      {/* <table className={styles['table-area']} border="1">
+
+      <div className={styles['table-area']}>
+        <dl>
+          <dt>商品编码</dt>
+          <dt>商品条码</dt>
+          <dt>商品名称</dt>
+          <dt>规格</dt>
+          <dt>单位</dt>
+          <dt>应收数量</dt>
+          <dt>实收数量</dt>
+        </dl>
+        <dl className={styles['page']}>
+          <dd>SKU0000001</dd>
+          <dd>BARCODE0000001</dd>
+          <dd>练习册</dd>
+          <dd>2件/套</dd>
+          <dd>套</dd>
+          <dd>250</dd>
+          <dd>250</dd>
+        </dl>
+        <dl>
+          <dd>SKU0000002</dd>
+          <dd>BARCODE0000002</dd>
+          <dd>练习册</dd>
+          <dd>2件/套</dd>
+          <dd>套</dd>
+          <dd>250</dd>
+          <dd>250</dd>
+        </dl>
+      </div>
+      {/* <table border="1" className={styles['table-area']}>
         <tr>
-          <th>Month</th>
-          <th>Savings</th>
+          <td>商品编码</td>
+          <td>商品条码</td>
+          <td>商品名称</td>
+          <td>规格</td>
+          <td>单位</td>
+          <td>应收数量</td>
+          <td>实收数量</td>
         </tr>
         <tr>
-          <td>January</td>
-          <td>$100</td>
+          <td>SKU0000001</td>
+          <td>BARCODE0000002</td>
+          <td>练习册</td>
+          <td>2件/套</td>
+          <td>套</td>
+          <td>250</td>
+          <td>250</td>
+        </tr>
+        <tr>
+          <td>SKU0000002</td>
+          <td>SKU0000002</td>
+          <td>鞋子</td>
+          <td>件</td>
+          <td>件</td>
+          <td>200</td>
+          <td>200</td>
         </tr>
       </table> */}
-      <table border="1" className={styles['table-area']}>
-        <tr>
-          <td>&nbsp;</td>
-          <td>t1</td>
-          <td>t2</td>
-          <td>t3</td>
-          <td>t4</td>
-          <td>t5</td>
-          <td>t6</td>
-        </tr>
-        <tr>
-          <td>r1</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td>r2</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-      </table>
-      {/* <Table
-        className="mb-20"
-        size="small"
-        // bordered={this.tableBodder}
-        dataSource={dataSource}
-        columns={columns}
-        pagination={false}
-      /> */}
+      
       <ul className={styles['sign-area']}>
         <li>
           <span>交接人:</span>

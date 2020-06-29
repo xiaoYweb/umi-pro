@@ -6,6 +6,7 @@ import { Link } from 'umi';
 import Wrap from '@/components/Wrap';
 import Loading from '@/components/Loading';
 import Toast from '@/lib/Toast';
+import Print from './Print';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -97,7 +98,10 @@ class InStorage extends PureComponent {
     pageSize: 10,
     selectedRowKeys: [],
     isAllSelected: false,
+    printList: []
   }
+
+  printInstance = React.createRef()
 
   componentDidMount() {
     this.requestList()
@@ -190,7 +194,18 @@ class InStorage extends PureComponent {
   handlePrint = () => { // 收货交接单打印
     // const { selectedRowKeys, isAllSelected } = this.state;
     const payload = this.retParams()
-    this.props.dispatch({ type: 'purchase/requestListPrint', payload })
+    this.props.dispatch({ 
+      type: 'purchase/requestListPrint', 
+      payload, 
+      success: printList => {
+        this.setState({ printList }, () => {
+          console.log(printList)
+          // eslint-disable-next-line no-unused-expressions
+          this.printInstance.current?.handlePrint()
+        })
+        
+      }
+    })
   }
 
   handleExport = () => { // 单据导出
@@ -209,10 +224,10 @@ class InStorage extends PureComponent {
   }
 
   render() {
-    const { pageNum, pageSize, isAllSelected, selectedRowKeys } = this.state;
+    const { pageNum, pageSize, isAllSelected, selectedRowKeys, printList } = this.state;
     const { form: { getFieldDecorator }, list = [], total } = this.props;
     const tableLoading = this.retIsEffectLoading('purchase/requestGetList')
-    const exportLoading = this.retIsEffectLoading('purchase/requestListExport') || this.retIsEffectLoading('purchase/requestDetailExport')
+    const exportLoading = this.retIsEffectLoading('purchase/requestListExport') || this.retIsEffectLoading('purchase/requestDetailExport') || this.retIsEffectLoading('purchase/requestListPrint');
     const canOperate = isAllSelected || selectedRowKeys.length > 0; // 是否可以操作 打印 导出等功能
     const rowSelection = {
       selectedRowKeys,
@@ -358,6 +373,7 @@ class InStorage extends PureComponent {
             } 页</span>
           }}
         />
+        <Print ref={this.printInstance} list={printList} />
     </Wrap>);
   }
 }

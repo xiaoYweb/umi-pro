@@ -64,9 +64,9 @@ const model = {
       entry && success()
     },
 
-    *requestListPrint({ payload }, { call }) { // 收货交接单打印
+    *requestListPrint({ payload, success }, { call }) { // 收货交接单打印
       const { entry } = yield call(listPrint, payload)
-      console.log(entry)
+      entry && success(entry)
     },
 
     *requestListExport({ payload }, { call }) { // 单据导出

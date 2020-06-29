@@ -1,15 +1,30 @@
+.init() {
+  h1, h2, h3, h4 { margin: 0; }
+  ul,li, dl, dt, dd { margin: 0; padding: 0; }
+}
+
+.common() {
+  .mb-10 { margin-bottom: 10px; }
+  .mb-20 { margin-bottom: 20px; }
+
+}
+
 .print-area {
-  ul, li {
-    padding: 0;
-    margin: 0;
+  .init();
+  :global {
+    .common();
   }
-  ul {
+  .title-area {
     display: flex;
     flex-wrap: wrap;
+    h3 {
+      font-size: 14px
+    }
     li {
-      width: 33%;
+      width: 33%; margin-bottom: 5px;
     }
   }
+  
   h3 {
     font-weight: 400;
     & > span:nth-of-type(1) {
@@ -18,13 +33,35 @@
   }
   h2 {
     text-align: center;
-    margin-bottom: 10px;
   }
 }
 
 .table-area {
   margin-bottom: 20px;
   width: 100%;
+  text-align: center;
+  & > dl {
+    display: flex;
+    & > dt:nth-of-type(1) { width: 20%; }
+    & > dt:nth-of-type(2) { width: 20%; }
+    & > dt:nth-of-type(3) { width: 20%; }
+    & > dt:nth-of-type(4) { width: 10%; }
+    & > dt:nth-of-type(5) { width: 10%; }
+    & > dt:nth-of-type(6) { width: 10%; }
+    & > dt:nth-of-type(7) { width: 10%; }
+    & > dd:nth-of-type(1) { width: 20%; }
+    & > dd:nth-of-type(2) { width: 20%; }
+    & > dd:nth-of-type(3) { width: 20%; }
+    & > dd:nth-of-type(4) { width: 10%; }
+    & > dd:nth-of-type(5) { width: 10%; }
+    & > dd:nth-of-type(6) { width: 10%; }
+    & > dd:nth-of-type(7) { width: 10%; }
+
+    & > dt { border: 1px solid #bbb; }
+    & > dd { border: 1px solid #bbb; border-top: 0px; }
+    dt + dt { border-left: 0px }
+    dd + dd { border-left: 0px }
+  }
 }
 
 .sign-area {
@@ -47,4 +84,13 @@
 .page {
 	break-after: page;
 	page-break-after: always;
+}
+
+.hide-wrap {
+  // height: 0;
+  // overflow: hidden;
+}
+
+.print-content {
+  padding: 0;
 }

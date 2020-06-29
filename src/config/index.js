@@ -1,13 +1,13 @@
 const env = process.env.APP_ENV; // root/config/ config.ts --- define 决定环境变量
 
 const baseUrl = {
-  development: 'https://dev-api.xinc818.com/',
+  development: 'https://daily-api.xinc818.com/',
   testing: 'https://daily-api.xinc818.com/',
   production: '/',
 }
 
 const authUrl = {
-  development: 'https://dev.xinc818.com/',
+  development: 'https://daily.xinc818.com/',
   testing: 'https://daily.xinc818.com/',
   production: '/',
 }

@@ -3,7 +3,7 @@ import config from '@/config';
 import { post, requestExcel } from '@/lib/http';
 
 function getWhid() {
-  return 101 || localStorage.getItem(config.WAREHOUSE_ID_KEY);
+  return localStorage.getItem(config.WAREHOUSE_ID_KEY);
 }
 
 /**
