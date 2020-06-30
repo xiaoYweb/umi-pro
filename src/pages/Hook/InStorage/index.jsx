@@ -17,13 +17,17 @@ function Instorage(props) {
   const [pageSize, setPageSize] = useState(10)
   const [isAllSelected, selectAll] = useState(false)
   const [selectedRowKeys, onSelectChange] = useState([])
-
-  const requestList = () => { // 请求采购入库单列表
+  // console.log(1)
+  const requestList = (current, size) => { // 请求采购入库单列表
     const { dispatch, form } = props;
     const options = form.getFieldsValue()
     dispatch({
       type: 'hookppurchase/requestGetList',
-      payload: { ...formatParams(options), pageNum, pageSize }
+      payload: { 
+        ...formatParams(options), 
+        pageNum: current || pageNum, 
+        pageSize: size || pageSize 
+      }
     })
     window.scrollTo(0, 0);
   }
@@ -34,7 +38,7 @@ function Instorage(props) {
 
   const handleSearch = () => { // 搜索操作
     setPageNum(1)
-    requestList()
+    requestList(1)
   }
 
   const handleReset = () => { // 重置操作
@@ -45,7 +49,7 @@ function Instorage(props) {
   const handlePageChange = ({ current, pageSize: size }) => { // 切换 采购入库单列表 页码
     setPageNum(current)
     setPageSize(size)
-    requestList()
+    requestList(current, size)
   }
 
   const getCheckboxProps = record => ({ // 表格 列表项 是否允许被选择 
@@ -54,7 +58,7 @@ function Instorage(props) {
   })
 
   const handleSelectAll = e => { // toggle 全选按钮(勾选后 后端 将符合条件的 list 全部操作 打印、导出)
-    selectAll({ isAllSelected: e.target.checked })
+    selectAll(e.target.checked)
   }
 
   const retIsEffectLoading = key => { // 返回 modal.effects 是否请求中 
@@ -64,7 +68,7 @@ function Instorage(props) {
 
   const retParams = () => { // 返回 所需参数
     const options = props.form.getFieldsValue()
-    const params = { ...formatParams(options), pageNum, pageSize }
+    const params = { ...formatParams(options) }
     params.inStorageOrderIds = isAllSelected ? [] : selectedRowKeys;
     return params;
   }
