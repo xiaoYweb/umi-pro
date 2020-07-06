@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'dva';
 import { Form, Row, Col, Input, Select, DatePicker, Button, Table, Checkbox } from 'antd';
-import Wrap from '@/components/Wrap';
+import Wrap from '@/components/MainWrap';
 import Loading from '@/components/Loading';
 import Toast from '@/lib/Toast';
 import retColumns from './columns';

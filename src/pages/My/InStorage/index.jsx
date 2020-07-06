@@ -3,7 +3,7 @@ import moment from 'moment';
 import { connect } from 'dva';
 import { Form, Row, Col, Input, Select, DatePicker, Button, Table, Checkbox } from 'antd';
 import { Link } from 'umi';
-import Wrap from '@/components/Wrap';
+import Wrap from '@/components/MainWrap';
 import Loading from '@/components/Loading';
 import Toast from '@/lib/Toast';
 import Print from './Print';

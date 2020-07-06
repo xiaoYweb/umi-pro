@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Wrap from '@/components/Wrap';
+import Wrap from '@/components/MainWrap';
 import { Table, Descriptions, Form } from 'antd';
 import { connect } from 'dva';
 import { router } from 'umi';

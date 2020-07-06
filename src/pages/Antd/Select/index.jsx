@@ -1,6 +1,6 @@
 import React from 'react';
 import { Divider } from 'antd';
-import Wrap from '@/components/Wrap';
+import Wrap from '@/components/MainWrap';
 import Demo1 from './demo1';
 import Demo2 from './demo2';
 import Demo3 from './demo3';
