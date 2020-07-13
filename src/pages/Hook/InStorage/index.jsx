@@ -13,32 +13,30 @@ const DATE_FORMAT = 'YYYY-MM-DD';
 
 
 function Instorage(props) {
-  const [pageNum, setPageNum] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  const [pageInfo, setPageInfo] = useState({ pageNum: 1, pageSize: 10 })
   const [isAllSelected, selectAll] = useState(false)
   const [selectedRowKeys, onSelectChange] = useState([])
-  // console.log(1)
-  const requestList = (current, size) => { // 请求采购入库单列表
+  const renderInfo = useState(0)
+  const reRender = renderInfo[1];
+
+  useEffect(() => {
     const { dispatch, form } = props;
     const options = form.getFieldsValue()
+    console.log('---request list---', pageInfo)
+    const { pageNum, pageSize } = pageInfo;
     dispatch({
       type: 'hookppurchase/requestGetList',
-      payload: { 
-        ...formatParams(options), 
-        pageNum: current || pageNum, 
-        pageSize: size || pageSize 
+      payload: {
+        ...formatParams(options),
+        pageNum,
+        pageSize
       }
     })
     window.scrollTo(0, 0);
-  }
-
-  useEffect(() => {
-    requestList()
-  }, [])
+  }, [pageInfo])
 
   const handleSearch = () => { // 搜索操作
-    setPageNum(1)
-    requestList(1)
+    setPageInfo(info => ({ ...info, pageNum: 1 }))
   }
 
   const handleReset = () => { // 重置操作
@@ -47,9 +45,10 @@ function Instorage(props) {
   }
 
   const handlePageChange = ({ current, pageSize: size }) => { // 切换 采购入库单列表 页码
-    setPageNum(current)
-    setPageSize(size)
-    requestList(current, size)
+    setPageInfo({
+      pageNum: current,
+      pageSize: size
+    })
   }
 
   const getCheckboxProps = record => ({ // 表格 列表项 是否允许被选择 
@@ -95,7 +94,7 @@ function Instorage(props) {
           type: 'hookppurchase/requestFinishReceive',
           payload: { inStorageOrderId },
           success: () => {
-            requestList()
+            reRender(n => n + 1)
           }
         })
       },
@@ -109,7 +108,7 @@ function Instorage(props) {
           type: 'hookppurchase/requestRefuseReceive',
           payload: { inStorageOrderId },
           success: () => {
-            requestList()
+            reRender(n => n + 1)
           }
         })
       }
@@ -126,7 +125,7 @@ function Instorage(props) {
     onChange: onSelectChange,
     getCheckboxProps,
   };
-
+  const { pageNum, pageSize } = pageInfo;
   return <Wrap>
     <Loading loading={exportLoading} />
     <Form labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
@@ -243,7 +242,7 @@ function Instorage(props) {
           <Button type="primary" disabled={!canOperate} onClick={handlePrint}>收货交接单打印</Button>
           <Button type="primary" disabled={!canOperate} onClick={handleExport}>单据导出</Button>
           <Button type="primary" disabled={!canOperate} onClick={handleDetailExport}>明细导出</Button>
-          <Checkbox value={isAllSelected} onChange={handleSelectAll}>全选</Checkbox>
+          <Checkbox checked={isAllSelected} onChange={handleSelectAll}>全选</Checkbox>
         </div>
       </div>
     </Form>

@@ -5,10 +5,11 @@ import Demo1 from './demo1';
 import Demo2 from './demo2';
 import Demo3 from './demo3';
 import Demo4 from './demo4';
+import Demo5 from './demo5';
 
 class InputComp extends React.Component {
   state = {
-    index: 0
+    index: 5
   }
 
   render() {
@@ -21,6 +22,7 @@ class InputComp extends React.Component {
             : index === 2 ? <Demo2 />
             : index === 3 ? <Demo3 />
             : index === 4 ? <Demo4 />
+            : index === 5 ? <Demo5 />
             : null
           }
           <Divider dashed />

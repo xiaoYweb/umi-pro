@@ -24,9 +24,9 @@ class App extends React.Component {
   };
 
   handleClick = () => {
-    const res = this.props.form.getFieldsValue();
+    // const res = this.props.form.getFieldsValue();
     
-    console.log("App -> handleClick -> res", res.time[0])
+    // console.log("App -> handleClick -> res", res.time[0])
   }
 
   render() {

@@ -2,6 +2,7 @@ import { IRoute } from 'umi-types';
 import antdRoutes from './routes/antd';
 import myRoutes from './routes/my';
 import hookRoutes from './routes/hook';
+import testRoutes from './routes/test';
 
 const routes: IRoute[] = [
   {
@@ -100,6 +101,7 @@ const routes: IRoute[] = [
           ...myRoutes,
           ...hookRoutes,
           ...antdRoutes,
+          ...testRoutes,
           {
             component: './404',
           }
